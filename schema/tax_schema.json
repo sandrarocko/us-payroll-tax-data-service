@@ -1,1 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Payroll Tax Rule",
+  "type": "object",
+  "required": [
+    "jurisdiction",
+    "tax_key",
+    "tax_name",
+    "year",
+    "type",
+    "employee_or_employer",
+    "source_url",
+    "retrieved_at",
+    "version"
+  ],
+  "properties": {
+    "jurisdiction": {
+      "type": "string",
+      "enum": ["federal", "state"]
+    },
+    "state": {
+      "type": ["string", "null"],
+      "pattern": "^[A-Z]{2}$"
+    },
+    "tax_key": {
+      "type": "string"
+    },
+    "tax_name": {
+      "type": "string"
+    },
+    "year": {
+      "type": "integer"
+    },
+    "filing_status": {
+      "type": ["string", "null"],
+      "enum": ["single", "married_joint", "married_separate", "head_of_household", null]
+    },
+    "type": {
+      "type": "string",
+      "enum": ["brackets", "flat", "fixed_rate"]
+    },
+    "rate": {
+      "type": ["number", "null"]
+    },
+    "brackets": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "object",
+        "properties": {
+          "min": { "type": "number" },
+          "max": { "type": ["number", "null"] },
+          "rate": { "type": "number" }
+        },
+        "required": ["min", "rate"]
+      }
+    },
+    "wage_base_limit": {
+      "type": ["number", "null"]
+    },
+    "employee_or_employer": {
+      "type": "string",
+      "enum": ["employee", "employer", "both"]
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "retrieved_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "version": {
+      "type": "string"
+    }
+  }
+}
 
